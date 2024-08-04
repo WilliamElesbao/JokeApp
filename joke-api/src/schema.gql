@@ -1,0 +1,72 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Flags {
+  nsfw: Boolean
+  religious: Boolean
+  political: Boolean
+  racist: Boolean
+  sexist: Boolean
+  explicit: Boolean
+}
+
+type JokeSingle {
+  error: Boolean
+  category: String
+  type: String
+  setup: String
+  delivery: String
+  joke: String
+  flags: Flags
+  id: Int
+  safe: Boolean
+  lang: String
+}
+
+type Query {
+  """Get a random joke. Requires API key authentication."""
+  getJoke(categories: [JokeCategory!] = ANY, language: JokeLanguage = EN, flags: [FlagCategory!] = [], jokeType: [JokeType!], searchString: String, minId: Int, maxId: Int, amount: Int = 1): JokeUnion
+}
+
+union JokeUnion = JokeSingle | JokeMultiple
+
+type JokeMultiple {
+  error: Boolean
+  amount: Float
+  jokes: [JokeSingle!]
+}
+
+"""Joke categories"""
+enum JokeCategory {
+  ANY
+  PROGRAMMING
+  MISC
+  DARK
+  PUN
+  SPOOKY
+  CHRISTMAS
+}
+
+"""Joke languages"""
+enum JokeLanguage {
+  EN
+  PTBR
+  DE
+}
+
+"""Flag categories"""
+enum FlagCategory {
+  NSFW
+  RELIGIOUS
+  POLITICAL
+  RACIST
+  SEXIST
+  EXPLICIT
+}
+
+"""Joke types"""
+enum JokeType {
+  SINGLE
+  TWOPART
+}
