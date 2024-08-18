@@ -11,7 +11,6 @@ export function RadioCategoryGroup() {
   return (
     <div className="flex flex-col gap-3">
       <RadioGroup
-        label="Select your favorite city"
         value={selected}
         isInvalid={isInvalid}
         onValueChange={setSelected}

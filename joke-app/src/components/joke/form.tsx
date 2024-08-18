@@ -1,14 +1,13 @@
 'use client';
 
+import { Button } from '@nextui-org/button';
 import axios from 'axios';
 import { useState } from 'react';
 import { Blacklist } from './blacklist';
 import { Category } from './category';
-import { JokeAmount } from './joke-amount';
 import { JokeRange } from './joke-range';
 import { JokeSearch } from './joke-search';
 import { JokeType } from './joke-type';
-import { Language } from './language';
 
 interface FormData {
   category: string[];
@@ -20,7 +19,7 @@ interface FormData {
   jokeSearch: string | null;
 }
 
-export const Form = ({jokes}:{jokes: any}) => {
+export const Form = ({ jokes }: { jokes: any }) => {
   const [formData, setFormData] = useState<FormData>({
     category: ['ANY'], // Default category
     language: 'EN', // Default language
@@ -40,16 +39,16 @@ export const Form = ({jokes}:{jokes: any}) => {
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(formData);
+    // console.log(formData);
     console.log(formData.category);
     console.log(formData.language);
     console.log(JSON.stringify(formData.blacklist));
-    // console.log(formData.blacklist)
+    console.log(formData.blacklist);
     console.log(JSON.stringify(formData.jokeType));
     console.log(formData.jokeSearch);
     console.log(formData.jokeRange.from);
     console.log(formData.jokeRange.to);
-    console.log(formData.jokeAmount);
+    // console.log(formData.jokeAmount);
 
     const query = `
       query GetJoke(
@@ -127,7 +126,7 @@ export const Form = ({jokes}:{jokes: any}) => {
         },
       );
       console.log(response.data);
-      jokes(response.data)
+      jokes(response.data);
     } catch (error) {
       if (axios.isAxiosError(error)) {
         console.error('Axios error:', error.message);
@@ -138,22 +137,35 @@ export const Form = ({jokes}:{jokes: any}) => {
   };
 
   return (
-    <form onSubmit={onSubmit}>
-      <Category onChange={(value) => handleInputChange('category', value)} />
-      <Language
-        onChange={(value) => handleInputChange('language', value)}
+    <form onSubmit={onSubmit} className="m-2">
+      <Category
+        onChangeLanguage={(value) => handleInputChange('language', value)}
+        onChangeCategory={(value) => handleInputChange('category', value)}
         selectedLanguage={formData.language}
       />
+      {/* <Language
+        onChange={(value) => handleInputChange('language', value)}
+        selectedLanguage={formData.language}
+      /> */}
       <Blacklist onChange={(value) => handleInputChange('blacklist', value)} />
       <JokeType onChange={(value) => handleInputChange('jokeType', value)} />
-      <JokeRange onChange={(value) => handleInputChange('jokeRange', value)} />
-      <JokeAmount
-        onChange={(value) => handleInputChange('jokeAmount', value)}
+      <JokeRange
+        onChangeRange={(value) => handleInputChange('jokeRange', value)}
+        onChangeAmount={(value) => handleInputChange('jokeAmount', value)}
       />
+      {/* <JokeAmount
+        onChange={(value) => handleInputChange('jokeAmount', value)}
+      /> */}
       <JokeSearch
         onChange={(value) => handleInputChange('jokeSearch', value)}
       />
-      <button type="submit">Submit</button>
+      <Button
+        type="submit"
+        className="mt-2 w-full rounded-full font-semibold text-white"
+        color="secondary"
+      >
+        Submit
+      </Button>
     </form>
   );
 };

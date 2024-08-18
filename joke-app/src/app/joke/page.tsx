@@ -1,9 +1,8 @@
-'use client'
+'use client';
 
-import { Form } from "@/components/joke/form";
-import { JokeCards } from "@/components/joke/joke-cards";
-import { SidebarNav } from "@/components/joke/sidebar";
-import { useState } from "react";
+import { Form } from '@/components/joke/form';
+import { JokeCards } from '@/components/joke/joke-cards';
+import { useState } from 'react';
 
 export default function Page() {
   const [jokes, setJokes] = useState<any>([]);
@@ -12,14 +11,9 @@ export default function Page() {
     setJokes(jokes);
   }
   return (
-    <>
-      <SidebarNav >
-        {/* <Dashboard /> */}
-        <Form jokes={renderJokes}/>
-        {/* if change jokes rerender this cards */}
-        
-        <JokeCards jokes={jokes.data}/>
-      </SidebarNav>
-    </>
+    <div className="">
+      <Form jokes={renderJokes} />
+      <JokeCards jokes={jokes.data} />
+    </div>
   );
 }
