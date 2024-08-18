@@ -6,14 +6,21 @@ import { useState } from 'react';
 
 export default function Page() {
   const [jokes, setJokes] = useState<any>([]);
+  const [isPending, setIsPending] = useState<boolean>(false);
+  const [noJoke, setNotJoke] = useState<boolean>(false);
+
   async function renderJokes(jokes: any) {
-    console.log(jokes);
     setJokes(jokes);
   }
+
   return (
-    <div className="">
-      <Form jokes={renderJokes} />
-      <JokeCards jokes={jokes.data} />
+    <div className="md:grid md:grid-cols-2">
+      <Form
+        jokes={renderJokes}
+        isPendingRequest={(pendingStatus) => setIsPending(pendingStatus)}
+        noJoke={(noJokeStatus) => setNotJoke(noJokeStatus)}
+      />
+      <JokeCards jokes={jokes.data} isPending={isPending} />
     </div>
   );
 }

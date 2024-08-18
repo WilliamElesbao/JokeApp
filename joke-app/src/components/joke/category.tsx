@@ -7,9 +7,11 @@ import {
   SelectItem,
   Switch,
 } from '@nextui-org/react';
-import { MoonIcon, SunIcon } from '@radix-ui/react-icons';
+// import { MoonIcon, SunIcon } from '@radix-ui/react-icons';
 import { Label } from '@radix-ui/react-label';
 import { useState } from 'react';
+import DicesIcon from './dices-icon';
+import { CogIcon } from 'lucide-react';
 
 interface CategoryProps {
   onChangeCategory: (value: string[]) => void;
@@ -57,9 +59,9 @@ export const Category = ({
             thumbIcon={({ isSelected, className }) => {
               setIsSelected(isSelected);
               return isSelected ? (
-                <SunIcon className={className} />
+                <DicesIcon />
               ) : (
-                <MoonIcon className={className} />
+                <CogIcon />
               );
             }}
             className="mt-2"

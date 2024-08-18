@@ -29,6 +29,9 @@ export const Blacklist = ({ onChange }: BlacklistProps) => {
           value={selectedFlags}
           onChange={handleChange}
         >
+          <span className="text-sm text-zinc-400 hidden md:block">
+            Select some flags to blacklist
+          </span>
           <div className="grid w-full grid-cols-2 gap-2">
             <div className="flex flex-col">
               <Checkbox value="NSFW">

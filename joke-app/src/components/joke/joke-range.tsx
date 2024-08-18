@@ -32,7 +32,7 @@ export const JokeRange = ({
   };
 
   return (
-    <div className="my-4 grid h-auto w-full grid-cols-2 gap-2 rounded-lg bg-zinc-900 p-4">
+    <div className="grid h-auto w-full grid-cols-2 gap-2 rounded-lg bg-zinc-900 p-4">
       {/* Range */}
       <div className="flex flex-col">
         <Label className="text-zinc-300">
@@ -77,7 +77,7 @@ export const JokeRange = ({
 
       {/* Amount */}
       <div className="flex flex-col">
-        <Label className="text-zinc-300 text-center">Amount of jokes:</Label>
+        <Label className="text-center text-zinc-300">Amount of jokes:</Label>
         {/* <Label>from:</Label> */}
         <div className="grid h-full place-items-center">
           <Input
@@ -89,7 +89,7 @@ export const JokeRange = ({
             max={10}
             defaultValue={'1'}
             onChange={handleChangeAmount}
-            className="w-10"
+            className="w-1/2"
             classNames={{
               input: 'text-center',
             }}

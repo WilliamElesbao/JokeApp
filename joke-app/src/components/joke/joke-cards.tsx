@@ -1,10 +1,16 @@
 'use client';
 
 import Image from 'next/image';
-import { Tabs } from '../ui/tabs';
 import { useEffect, useState } from 'react';
+import { Tabs } from '../ui/tabs';
 
-export function JokeCards({ jokes }: { jokes: any }) {
+export function JokeCards({
+  jokes,
+  isPending,
+}: {
+  jokes: any;
+  isPending: boolean;
+}) {
   console.log(jokes);
 
   const [tabsContent, setTabsContent] = useState<any>([]);
@@ -44,11 +50,9 @@ export function JokeCards({ jokes }: { jokes: any }) {
     setLastJoke(newJokesContent);
   }, [jokes]);
 
-  console.log(tabsContent);
-
   return (
     <div className="my-4">
-      {tabsContent.length > 0 ? (
+      {tabsContent.length > 0 && !isPending ? (
         <div
           key={JSON.stringify(tabsContent)}
           className="b relative mx-auto my-12 flex h-[20rem] w-full max-w-5xl flex-col items-start justify-start [perspective:1000px]"
@@ -56,7 +60,7 @@ export function JokeCards({ jokes }: { jokes: any }) {
           <Tabs tabs={tabsContent} />
         </div>
       ) : (
-                <div className="flex flex-col w-full items-center justify-center">
+        <div className="flex w-full flex-col items-center justify-center">
           {/* <span className="text-zinc-400 mb-4">No jokes</span> */}
           <Image
             src={`https://media.dev.to/cdn-cgi/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fdu86hteesc92zhfae4q2.gif`}
